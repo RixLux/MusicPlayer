@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Music</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(45deg, #1d2b64, #f8cdda);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .upload-container {
+      background: rgba(0, 0, 0, 0.85);
+      padding: 40px 50px;
+      border-radius: 15px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+      width: 450px;
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      text-decoration: none;
+      color: #f8cdda;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .back-button:hover {
+      color: #ff6b6b;
+    }
+
+    .upload-container h2 {
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    input[type="text"], input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    input[type="text"] {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    input[type="file"] {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      cursor: pointer;
+    }
+
+    .upload-container button {
+      margin-top: 20px;
+      background: #4CAF50;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      width: 100%;
+    }
+
+    .upload-container button:hover {
+      background: #3e8e41;
+      transform: translateY(-2px);
+    }
+
+    .upload-preview {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="music-player.html" class="back-button">&larr; Home</a>
+
+  <div class="upload-container">
+    <h2>Upload Your Music</h2>
+    <form id="upload-form">
+      <div class="form-group">
+        <label for="song-title">Song Title</label>
+        <input type="text" id="song-title" name="song-title" placeholder="Enter song title">
+      </div>
+
+      <div class="form-group">
+        <label for="artist-name">Artist Name</label>
+        <input type="text" id="artist-name" name="artist-name" placeholder="Enter artist name">
+      </div>
+
+      <div class="form-group">
+        <label for="music-file">Choose a File</label>
+        <input type="file" id="music-file" name="music-file" accept="audio/*">
+      </div>
+
+      <div class="upload-preview" id="file-preview">No file chosen</div>
+
+      <button type="button" id="upload-btn">Upload</button>
+    </form>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('music-file');
+    const filePreview = document.getElementById('file-preview');
+    const uploadButton = document.getElementById('upload-btn');
+
+    // Display chosen file name
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      filePreview.textContent = file ? `Selected file: ${file.name}` : 'No file chosen';
+    });
+
+    // Simulate upload functionality
+    uploadButton.addEventListener('click', () => {
+      const title = document.getElementById('song-title').value;
+      const artist = document.getElementById('artist-name').value;
+      if (!title || !artist || !fileInput.files[0]) {
+        alert('Please fill out all fields and choose a file before uploading.');
+      } else {
+        alert(`Uploading "${title}" by ${artist}...`);
+        // You can add actual upload logic here
+      }
+    });
+  </script>
+
+</body>
+</html>

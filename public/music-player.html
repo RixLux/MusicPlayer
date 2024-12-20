@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player</title>
+  <!--<link rel="stylesheet" href="music-player/music-player.css">-->
+  <link rel="stylesheet" href="music-player/CSS/music-playerTopNavigation.css">
+  <link rel="stylesheet" href="music-player/CSS/music-playerMainContent.css">
+  <link rel="stylesheet" href="music-player/CSS/music-playerMusicPlayer.css">
+  <link rel="stylesheet" href="music-player/CSS/music-playerSideBar.css">
+  <link rel="stylesheet" href="music-player/CSS/music-playerProfile.css">
+  <link rel="stylesheet" href="music-player/CSS/music-playerPremium.css">
+  <link rel="stylesheet" href="music-player/CSS/music-playerMediaPlayer.css">
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header>
+    <a href="#" class="home-button" onclick="resetPage()">&#x2302; Home</a>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for songs, albums, or artists...">
+    </div>
+    <div class="dropdown">
+      <div class="profile">
+        <img src="Image/i am kawaii.jpg" alt="Profile Picture">
+      </div>
+      <div class="dropdown-content">
+        <a href="#" onclick="loadProfile()">Change Profile</a>
+        <a href="#" onclick="loadPremium()">Upgrade to Premium</a>
+        <a href="#" onclick="loadUploadMusic()">Upload Music</a>
+        <a href="index.html">Log Out</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Your Playlists</h2>
+    <ul class="playlist">
+      <li onclick="showPlaylist('favorite')">&#x1F3B5; Favorite Songs</li>
+      <li onclick="showPlaylist('chill')">&#x1F3B5; Chill Vibes</li>
+      <li onclick="showPlaylist('workout')">&#x1F3B5; Workout Mix</li>
+      <li onclick="showPlaylist('study')">&#x1F3B5; Study Playlist</li>
+    </ul>
+    <div class="expand-btn">Expand Playlist</div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content" id="main-content">
+    <h2>Welcome to Your MusicPlayer</h2>
+    <p>Start playing your favorite tunes or explore new ones!</p>
+
+    <!-- New Additions -->
+    <section class="featured-playlist">
+      <h3>Featured Playlist</h3>
+      <div class="playlist-card">
+        <img src="Image/amatsutsumi.jpg" alt="Featured Playlist">
+        <div class="playlist-info">
+          <h4>Amatsutsumi</h4>
+          <p>Perfect playlist to relax and unwind.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="song-recommendations">
+      <h3>Recommended for You</h3>
+      <ul>
+        <li onclick="playSong('bgm23.ogg')">Song 1 - Artist</li>
+        <li onclick="playSong('bgm24.ogg')">Song 2 - Artist</li>
+        <li onclick="playSong('bgm25.ogg')">Song 3 - Artist</li>
+      </ul>
+    </section>
+
+    <section class="trending-now">
+      <h3>Trending Now</h3>
+      <ul>
+        <li onclick="playSong('bgm29.ogg')">Hit Song 1</li>
+        <li onclick="playSong('bgm30.ogg')">Hit Song 2</li>
+        <li onclick="playSong('bgm31.ogg')">Hit Song 3</li>
+      </ul>
+    </section>
+
+    
+  </main>
+
+  <!-- Media Player -->
+  <footer class="music-player">
+    <div class="music-info">
+      <h3 id="current-song">No song playing</h3>
+      <p id="current-artist">Select a song to start playing</p>
+    </div>
+    <div class="controls">
+      <button id="prev-btn">&#x23EE;</button>
+      <button id="play-pause-btn">&#x25B6;</button>
+      <button id="next-btn">&#x23ED;</button>
+      <button id="enlarge-btn" onclick="enlargeContent()"> 👓</button>
+    </div>
+
+    <!-- Audio Player -->
+    <section id="audio-player" style="display:none;">
+      <audio id="audio" loop>
+        <source id="audio-source" src="" type="audio/ogg">
+        Your browser does not support the audio element.
+      </audio>
+    </section>
+  </footer>
+
+  <script src="music-player/JS/music-player.js"></script>
+  <script src="music-player/JS/Premium.js"></script>
+  <script src="music-player/JS/MediaPlayer.js"></script>
+  <script src="music-player/JS/TopNavigation.js"></script>
+  <script src="music-player/JS/UploadSong.js"></script>
+
+  <script>
+    // Array to hold the playlist of songs
+    var playlist = ['bgm23.ogg', 'bgm24.ogg', 'bgm25.ogg', 'bgm29.ogg', 'bgm30.ogg', 'bgm31.ogg']; 
+    var currentSongIndex = 0;  // Keep track of the current song
+  
+    function playSong(songFile) {
+      var audio = document.getElementById('audio');
+      var audioSource = document.getElementById('audio-source');
+      var currentSong = document.getElementById('current-song');
+      var currentArtist = document.getElementById('current-artist');
+  
+      // Update audio source and start playing
+      audioSource.src = 'Music/' + songFile;
+      audio.load();
+      audio.play();
+  
+      // Update current song info
+      currentSong.textContent = songFile.split('.')[0]; // Song name without extension
+      currentArtist.textContent = "Artist Name"; // You can update with artist info dynamically
+  
+      // Show the audio player
+      document.getElementById('audio-player').style.display = 'block';
+    }
+  
+    // Handle the end of a song and play the next one
+    document.getElementById('audio').addEventListener('ended', function () {
+      // Increment the song index
+      currentSongIndex++;
+      
+      // If we're at the end of the playlist, start over
+      if (currentSongIndex >= playlist.length) {
+        currentSongIndex = 0;
+      }
+  
+      // Play the next song
+      playSong(playlist[currentSongIndex]);
+    });
+  
+    // Optionally, you can modify the play/pause button to control the music:
+    document.getElementById('play-pause-btn').addEventListener('click', function() {
+      var audio = document.getElementById('audio');
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+  
+    // You can also handle next and previous song buttons if needed:
+    document.getElementById('next-btn').addEventListener('click', function() {
+      currentSongIndex++;
+      if (currentSongIndex >= playlist.length) {
+        currentSongIndex = 0; // Loop back to the first song
+      }
+      playSong(playlist[currentSongIndex]);
+    });
+  
+    document.getElementById('prev-btn').addEventListener('click', function() {
+      currentSongIndex--;
+      if (currentSongIndex < 0) {
+        currentSongIndex = playlist.length - 1; // Loop to the last song
+      }
+      playSong(playlist[currentSongIndex]);
+    });
+  
+  </script>
+  
+
+</body>
+</html>

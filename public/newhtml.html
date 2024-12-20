@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Background Music</title>
+    <style>
+        /* Styling for custom button */
+        .custom-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .custom-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Music Player</h1>
+    <p>Enjoy the music playing in the background!</p>
+
+    <!-- Hidden audio player -->
+    <audio id="background-audio" loop>
+        <source src="IndexBgm.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Custom Play/Pause Button -->
+    <button class="custom-button" id="toggle-music">Play Music</button>
+
+    <script>
+        // JavaScript for controlling the audio
+        const audio = document.getElementById('background-audio');
+        const button = document.getElementById('toggle-music');
+
+        let isPlaying = false;
+
+        button.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                button.textContent = 'Play Music';
+            } else {
+                audio.play();
+                button.textContent = 'Pause Music';
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
+</body>
+</html>
