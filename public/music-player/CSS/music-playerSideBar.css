@@ -4,21 +4,6 @@
   padding: 20px;
   overflow-y: auto;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 250px;
-  height: 100%;
- /* display: none;  Initially hidden */
-  z-index: 1000;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0.8; /* Slightly transparent */
-}
-
-/* Dragging styles (optional visual feedback) */
-.sidebar.dragging {
-  cursor: grabbing;
-  opacity: 1;
 }
 
 .sidebar h2 {
@@ -44,7 +29,6 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Button to toggle sidebar */
 .expand-btn {
   margin-top: 20px;
   text-align: center;
