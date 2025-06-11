@@ -1,54 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Background Music</title>
-    <style>
-        /* Styling for custom button */
-        .custom-button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .custom-button:hover {
-            background-color: #45a049;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player</title>
+  <!--<link rel="stylesheet" href="music-player/music-player.css">-->
+  <link rel="stylesheet" href="music-player/CSS/music-playerTopNavigation.css">
+  <link rel="stylesheet" href="music-player/CSS/music-playerMainContent.css">
+  <link rel="stylesheet" href="music-player/CSS/music-playerMusicPlayer.css">
+  <link rel="stylesheet" href="music-player/CSS/music-playerSideBar.css">
+  <link rel="stylesheet" href="music-player/CSS/music-playerProfile.css">
+  <link rel="stylesheet" href="music-player/CSS/music-playerPremium.css">
+  <link rel="stylesheet" href="music-player/CSS/music-playerMediaPlayer.css">
 </head>
 <body>
-    <h1>Welcome to the Music Player</h1>
-    <p>Enjoy the music playing in the background!</p>
 
-    <!-- Hidden audio player -->
-    <audio id="background-audio" loop>
-        <source src="IndexBgm.ogg" type="audio/ogg">
-        Your browser does not support the audio element.
-    </audio>
+<header>
+    <button id="toggle-sidebar-btn" class="toggle-sidebar">☰ </button>
+    <a href="#" class="home-button" onclick="resetPage()">&#x2302; </a>
+   
 
-    <!-- Custom Play/Pause Button -->
-    <button class="custom-button" id="toggle-music">Play Music</button>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for songs, albums, or artists...">
+    </div>
+    <div class="dropdown">
+      <div class="profile">
+        <img src="Image/i am kawaii.jpg" alt="Profile Picture">
+      </div>
+      <div class="dropdown-content">
+        <a href="#" onclick="loadProfile()">Change Profile</a>
+        <a href="#" onclick="loadPremium()">Upgrade to Premium</a>
+        <a href="#" onclick="loadUploadMusic()">Upload Music</a>
+        <a href="index.html">Log Out</a>
+      </div>
+    </div>
+  </header>
 
-    <script>
-        // JavaScript for controlling the audio
-        const audio = document.getElementById('background-audio');
-        const button = document.getElementById('toggle-music');
-
-        let isPlaying = false;
-
-        button.addEventListener('click', () => {
-            if (isPlaying) {
-                audio.pause();
-                button.textContent = 'Play Music';
-            } else {
-                audio.play();
-                button.textContent = 'Pause Music';
-            }
-            isPlaying = !isPlaying;
-        });
-    </script>
 </body>
 </html>

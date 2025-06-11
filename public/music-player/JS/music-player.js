@@ -72,39 +72,3 @@ function saveProfile() {
         <p>Your changes have been saved successfully!</p>
     `;
 }
-
-// Selecting elements
-const sidebar = document.querySelector('.sidebar');
-const expandBtn = document.querySelector('.expand-btn');
-
-// Toggle visibility
-expandBtn.addEventListener('click', () => {
-  if (sidebar.style.display === 'none' || sidebar.style.display === '') {
-    sidebar.style.display = 'block';
-  } else {
-    sidebar.style.display = 'none';
-  }
-});
-
-// Make sidebar draggable
-let isDragging = false;
-let startX, startY;
-
-sidebar.addEventListener('mousedown', (e) => {
-  isDragging = true;
-  startX = e.clientX - sidebar.offsetLeft;
-  startY = e.clientY - sidebar.offsetTop;
-  sidebar.classList.add('dragging');
-});
-
-document.addEventListener('mousemove', (e) => {
-  if (isDragging) {
-    sidebar.style.left = `${e.clientX - startX}px`;
-    sidebar.style.top = `${e.clientY - startY}px`;
-  }
-});
-
-document.addEventListener('mouseup', () => {
-  isDragging = false;
-  sidebar.classList.remove('dragging');
-});
